@@ -1,4 +1,5 @@
 # pdf_qa_tool.py
+import os
 import pdfplumber
 import gradio as gr
 from sentence_transformers import SentenceTransformer
@@ -6,7 +7,15 @@ from sklearn.metrics.pairwise import cosine_similarity
 from openai import OpenAI
 
 # ===================== CONFIG =====================
-OPENAI_API_KEY
+# Load API key from key.txt (local) or environment variable
+if os.path.exists("key.txt"):
+    with open("key.txt", "r") as f:
+        OPENAI_API_KEY = f.read().strip()
+else:
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+if not OPENAI_API_KEY:
+    raise ValueError("❌ OpenAI API Key not found. Please set it in key.txt or as an environment variable.")
 
 MODEL_NAME = "gpt-4o-mini"
 CHUNK_SIZE = 500
@@ -104,4 +113,3 @@ with gr.Blocks() as demo:
     close_btn.click(close_pdf, None, [pdf_status, upload_column, qa_column])
 
 demo.launch()
-
