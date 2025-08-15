@@ -6,8 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from openai import OpenAI
 
 # ===================== CONFIG =====================
-with open("key.txt", "r") as f:
-    OPENAI_API_KEY = f.read().strip()
+OPENAI_API_KEY
 
 MODEL_NAME = "gpt-4o-mini"
 CHUNK_SIZE = 500
@@ -105,3 +104,4 @@ with gr.Blocks() as demo:
     close_btn.click(close_pdf, None, [pdf_status, upload_column, qa_column])
 
 demo.launch()
+
