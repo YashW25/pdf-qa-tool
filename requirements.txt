@@ -1,0 +1,5 @@
+gradio
+pdfplumber
+sentence-transformers
+scikit-learn
+openai
